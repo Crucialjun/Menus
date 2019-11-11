@@ -10,20 +10,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     ActionMode mActionMode;
 
     private ActionMode.Callback mActionModeCallBack = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.action_mode_context_menu,menu);
+            inflater.inflate(R.menu.action_mode_context_menu, menu);
             return true;
         }
 
@@ -70,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if(mActionMode != null) {
+                if (mActionMode != null) {
                     return false;
-                }else{
+                } else {
                     mActionMode = startActionMode(mActionModeCallBack);
                     return true;
                 }
@@ -83,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu,menu);
+        inflater.inflate(R.menu.options_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuItem1:
                 Toast.makeText(this, "Menu Item 1 Selected", Toast.LENGTH_SHORT).show();
                 return true;
@@ -109,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.floating_context_menu,menu);
+        inflater.inflate(R.menu.floating_context_menu, menu);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.contextmenu1:
                 Toast.makeText(this, "Context Menu Item 1 Selected", Toast.LENGTH_SHORT).show();
                 return true;
@@ -130,4 +131,29 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    public void showPopUpMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.inflate(R.menu.pop_up_menu);
+        popupMenu.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.popmenu1:
+                Toast.makeText(this, "Pop Menu Item 1 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.popmenu2:
+                Toast.makeText(this, "Pop Menu Item 2 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.popmenu3:
+                Toast.makeText(this, "Pop Menu Item 3 Selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
+        }
+    }
+
 }

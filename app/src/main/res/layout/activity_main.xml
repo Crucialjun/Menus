@@ -27,4 +27,15 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Show Action Mode Menu" />
 
+    <Button
+        android:id="@+id/btnPopUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:onClick="showPopUpMenu"
+        android:text="Show Pop Up Menu"
+        app:layout_constraintBottom_toTopOf="@+id/btnActionmenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
